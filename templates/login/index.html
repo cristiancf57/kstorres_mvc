@@ -1,0 +1,34 @@
+{% extends "layout_login.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100 bg-opacity-50"> 
+    <div class="card p-5 shadow">
+        <div class="info d-flex align-items-center">
+            <img src="../../static/img/logot.png" alt="" width="160">
+            <div class=""><h5>_</h5></div>
+            <div class="col-lg-7">
+                <h3 class="text-success-emphasis">Iniciar Sesión</h3>
+                <form method="POST" action="/login">
+                    <label for="username" class="form-label">Usuario:</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <br>
+                    <input type="submit" value="Iniciar Sesión" class="form-control btn btn-warning w-60 text-center"><br><br>
+                    <label class=""><a href="">Registrarse</a></label>
+                </form>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>   
+</div><!-- /Hero Section -->
+
+{% endblock %}

@@ -2,7 +2,6 @@ from flask import request,redirect,url_for,Blueprint
 from models.rol_model import Rol
 from models.profesion_model import Profesion
 from models.usuario_model import Usuario
-from models.user_model import User
 from views import welcome_view
 
 welcome_bp=Blueprint('inicio',__name__,url_prefix='/inicio')

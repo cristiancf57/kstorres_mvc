@@ -34,6 +34,10 @@ class User(db.Model):
     def get_by_id(id):
         return User.query.get(id)
     
+    @staticmethod
+    def get_by_username(username):
+        return User.query.get(username)
+    
     def update(self,username=None,password=None,id_usuario=None):
         if username:
             self.username=username
