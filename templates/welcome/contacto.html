@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block title %} KSTorres | contacto {% endblock %}
+
+{% block content %}
+  <!-- Page Title -->
+  <div class="page-title dark-background" style="background-image: url(../../static/img/page-title-bg.jpg);">
+    <div class="container position-relative">
+      <h1>Contact</h1>
+      <nav class="breadcrumbs">
+        <ol>
+          <li><a href="/">Inicio</a></li>
+          <li class="current">Contacto</li>
+        </ol>
+      </nav>
+    </div>
+  </div><!-- End Page Title -->
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact section">
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-6">
+          <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+            <i class="bi bi-geo-alt"></i>
+            <h3>Dirección</h3>
+            <p>Calle Federico Suazo No. 1885 Edificio Alcazar, Torre Granada, Mezzanine Of. 9</p>
+          </div>
+        </div><!-- End Info Item -->
+
+        <div class="col-lg-3 col-md-6">
+          <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+            <i class="bi bi-telephone"></i>
+            <h3>Teléfonos</h3>
+            <p>(591) 2-2312591</p>
+            <p>(591) 65675740</p>
+          </div>
+        </div><!-- End Info Item -->
+
+        <div class="col-lg-3 col-md-6">
+          <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+            <i class="bi bi-envelope"></i>
+            <h3>Email</h3>
+            <p>alejandro.rojas@kstorressrl.com</p>
+          </div>
+        </div><!-- End Info Item -->
+
+      </div>
+
+      <div class="row gy-4 mt-1">
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d963.4619934339676!2d-68.13092180153818!3d-16.502255998987675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDMwJzA4LjEiUyA2OMKwMDcnNDkuMSJX!5e1!3m2!1ses-419!2sbo!4v1728608295348!5m2!1ses-419!2sbo" frameborder="0" style="border:0; width: 100%; height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div><!-- End Google Maps -->
+
+        <div class="col-lg-6">
+          <form action="/contacto" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+            <div class="row gy-4">
+
+              <div class="col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+              </div>
+
+              <div class="col-md-6 ">
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+              </div>
+
+              <div class="col-md-12">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+              </div>
+
+              <div class="col-md-12">
+                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                <button type="submit">Enviar Mensaje</button>
+              </div>
+
+            </div>
+          </form>
+        </div><!-- End Contact Form -->
+
+      </div>
+
+    </div>
+
+  </section><!-- /Contact Section -->
+
+{% endblock %}

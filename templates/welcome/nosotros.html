@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+{% block title %} KSTorres | Nosotros {% endblock %}
+{% block content %}
+<!-- Page Title -->
+  <div class="page-title dark-background" style="background-image: url(../../static/img/page-title-bg.jpg);">
+    <div class="container position-relative">
+      <h1>QUIENES SOMOS</h1>
+      <nav class="breadcrumbs">
+        <ol>
+          <li><a href="/">Inicio</a></li>
+          <li class="current">Quienes somos</li>
+        </ol>
+      </nav>
+    </div>
+  </div><!-- End Page Title -->
+
+  <!-- About Section -->
+  <section id="about" class="about section">
+
+    <div class="container">
+
+      <div class="row position-relative">
+
+        <div class="col-lg-7 about-img" data-aos="zoom-out" data-aos-delay="200"><img src="../../../static/img/about.jpg"></div>
+
+        <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+          <h2 class="inner-title">Quienes somos</h2>
+          <div class="our-story">
+            <h3>Nuestra empresa</h3>
+            <p>Somos una empresa constructora dedicada a la ejecución de obras civiles en el ámbito público y privado, cuya misión es emplear técnicas constructivas de vanguardia con:</p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span>Eficiencia</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Profesionalismo</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Honestidad</span></li>
+            </ul>
+            <p>de tal forma que se optimicen los tiempos y costos de ejecución de obra en beneficio de nuestros clientes.</p>
+            <p>Nuestro objetivo es ser la empresa líder a nivel nacional en innovación de procesos constructivos, actualizándonos siempre de acuerdo a los retos tecnológicos, reconocidos por una alta calidad en ejecución de obras logrando la satisfacción del cliente que confía en nosotros.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section><!-- /About Section -->
+
+  <!-- Alt Services Section -->
+  <section id="alt-services" class="alt-services section">
+
+    <div class="container">
+
+      <div class="row justify-content-around gy-4">
+        <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="../../../static/img/constructions-3.jpg" alt=""></div>
+
+        <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+          <h3>MISIÓN</h3>
+          <p>Somos una empresa constructora dedicada a la ejecución de obras civiles en el ámbito público y privado, cuya misión es emplear técnicas constructivas de vanguardia con eficiencia, profesionalismo y honestidad de tal forma que se optimicen los tiempos y costos de ejecución de obra en beneficio de nuestros clientes.</p>
+
+          <h3>VISIÓN</h3>
+          <p>Ser la empresa líder a nivel nacional en innovación de procesos constructivos, actualizándonos siempre de acuerdo a los retos tecnológicos, reconocidos por una alta calidad en ejecución de obras logrando la satisfacción del cliente que confía en nosotros.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section><!-- /Alt Services Section -->
+
+  <!-- Team Section -->
+  <section id="team" class="team section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Nuestro Equipo</h2>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-5">
+
+        {% for item in usuarios %}
+        <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
+          <div class="member-img">
+            <img src="../../static/img/team/{{ item.foto }}" class="img-fluid" alt="">
+            <div class="social">
+              <a href="#"><i class="bi bi-twitter-x"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info text-center">
+            
+            {% for profes in profesion %}
+                {% if profes.id == item.id_profesion %}
+                    <h4>{{profes.abreviado}} {{item.nombre}} {{item.napellido}}</h4>
+                    <span>{{profes.profesion}}</span>
+                {% endif %}
+            {% endfor %}
+            
+          </div>
+        </div><!-- End Team Member -->
+        {% endfor %}
+
+        <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="200">
+          <div class="member-img">
+            <img src="../../static/img/team/team-2.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href="#"><i class="bi bi-twitter-x"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info text-center">
+            <h4>MARCO ADOLFO SALINAS CASTRO</h4>
+            <span>Asesor Financiero</span>
+            <p>Licenciado en Ingeniería Financiera EPC- Universidad Católica Boliviana</p>
+            <p>Asistente Financiero Capital + Safi S.A.</p>
+          </div>
+        </div><!-- End Team Member -->
+
+        <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="300">
+          <div class="member-img">
+            <img src="../../static/img/team/team-3.jpg" class="img-fluid" alt="">
+            <div class="social">
+              <a href="#"><i class="bi bi-twitter-x"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="member-info text-center">
+            <h4>MARCO ANTONIO SALINAS IÑIGUEZ</h4>
+            <span>Asesor Comercial</span>
+            <p>Lic. en Administración de Empresas</p>
+            <p>Experiencia como Gerente General de varias empresas constructoras</p>
+          </div>
+        </div><!-- End Team Member -->
+
+      </div>
+
+    </div>
+
+  </section><!-- /Team Section -->
+
+{% endblock %}
