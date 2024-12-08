@@ -11,7 +11,7 @@ def index():
         username=request.form['username']
         password=request.form['password']
         user=User.password(password)
-        return redirect(url_for('home.index'))
+        return redirect(url_for('proyectos.index'))
     return login_view.inicio()
 
 @login_bp.route('/create',methods=['GET','POST'])

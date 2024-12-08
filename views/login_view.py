@@ -1,7 +1,7 @@
 from flask import render_template
 
-def inicio(user):
-    return render_template('login/index.html',user=user)
+def inicio():
+    return render_template('login/index.html')
 
 def create():
     return render_template('login/create')

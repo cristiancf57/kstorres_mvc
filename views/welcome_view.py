@@ -6,11 +6,11 @@ def inicio():
 def nosotros(roles,profesion,usuarios):
     return render_template('welcome/nosotros.html',usuarios=usuarios,roles=roles,profesion=profesion)
 
-def servicios():
-    return render_template('welcome/servicios.html')
+def servicios(proyectos):
+    return render_template('welcome/servicios.html',proyectos=proyectos)
 
-def proyectos():
-    return render_template('welcome/proyectos.html')
+def proyectos(proyectos,usuarios,profession):
+    return render_template('welcome/proyectos.html',proyectos=proyectos,usuarios=usuarios,profession=profession)
 
 def detall_proyect():
     return render_template('welcome/detalle.html')

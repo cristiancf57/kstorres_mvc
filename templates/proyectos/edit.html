@@ -1,0 +1,75 @@
+{% extends "layout_adm.html" %}
+{% block title %} KSTorres | Editar Proyecto {% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Editar proyecto</h5>
+
+                <!-- Multi Columns Form -->
+                <form class="row g-3" method="POST" action="{{ url_for('proyecto.edit',id=proyecto.id) }}">
+                <div class="col-md-12">
+                    <label for="" class="form-label">Proyecto</label>
+                    <input type="text" class="form-control" name="proyecto" value="{{ proyectos.proyecto }}" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="" class="form-label">Caracteristica</label>
+                    <input type="text" class="form-control" name="caracteristica" value="{{ proyectos.caracteristica }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Superficie</label>
+                    <input type="number" class="form-control" name="superficie" value="{{ proyectos.superficie }}">
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Ubicacion</label>
+                    <input type="text" class="form-control" name="ubicacion" value="{{ proyectos.ubicacion }}" placeholder="Departamento, Municipio, Distrito" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" value="{{ proyectos.imagen }}" name="imagen">
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Fecha de contrato</label>
+                    <input type="date" class="form-control" name="fecha_inicio" value="{{ proyectos.fecha_inicio.strftime('%Y-%m-%d') }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Fecha de entrega</label>
+                    <input type="date" class="form-control" name="fecha_fin" value="{{ proyectos.fecha_fin.strftime('%Y-%m-%d') }}">
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Estado</label>
+                    <select  class="form-select" name="estado" required>
+                        <opid="inputState"tion selected="">Seleccionar</option>
+                        {% for cliente in clientes %}
+                        <option value="{{proyectos.estado}}">{{ proyectos.estado }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Presupuesto</label>
+                    <input type="number" class="form-control" value="{{ proyectos.presupuesto }}" name="presupuesto" min="0" step="0.01">
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Usuario</label>
+                    <select name="cliente_id" id="" class="form-control" required>
+                        <option value="">Seleccionar un supervisor</option>
+                        {% for usuario in usuarios %}
+                        <option value="{{usuario.id}}" {% if usuario.id== proyecto.usuario_id %} selected {% endif %}>{{ usuario.nombre }} {{usuario.apellido}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning">Guardar</button>
+                </div>
+                </form><!-- End Multi Columns Form -->
+
+            </div>
+            </div>
+        </div>
+    </div>
+  </section>
+{% endblock %}

@@ -12,8 +12,8 @@ class Usuario(db.Model):
     id_profesion = db.Column(db.Integer,db.ForeignKey('profesiones.id'),nullable=False)
     id_rol = db.Column(db.Integer,db.ForeignKey('roles.id'),nullable=False)
     # especificar la relacion
-    rol = db.relationship('Rol', backref='usuarios')
-    profesion = db.relationship('Profesion',backref='usuarios')
+    rols = db.relationship('Rol', backref='usuarios')
+    profesions = db.relationship('Profesion',backref='usuarios')
 
     def __init__(self,nombre,apellido,foto,telefono,salario,obs,id_profesion,id_rol):
         self.nombre = nombre

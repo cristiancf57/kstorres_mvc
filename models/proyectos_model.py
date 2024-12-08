@@ -7,7 +7,7 @@ class Proyecto(db.Model):
     caracteristica = db.Column(db.String(100),nullable=False)
     superfice = db.Column(db.Numeric(15),nullable=True)
     ubicacion = db.Column(db.String(100),nullable=False)
-    imagen = db.Column(db.string(200),nullable=True)
+    imagen = db.Column(db.String(200),nullable=True)
     fecha_inicio = db.Column(db.Date,nullable=False)
     fecha_fin = db.Column(db.Date,nullable=True)
     estado = db.Column(db.String(20),nullable=True)
