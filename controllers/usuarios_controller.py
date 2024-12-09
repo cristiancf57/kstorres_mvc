@@ -1,9 +1,10 @@
-from flask import request,redirect,url_for,Blueprint
+from flask import request,redirect,url_for,Blueprint,session
 from datetime import datetime
 from models.usuario_model import Usuario
 from models.profesion_model import Profesion
 from models.rol_model import Rol
 from views import usuario_view
+from functools import wraps
 
 usuario_bp=Blueprint('usuario',__name__,url_prefix='/usuarios')
 
@@ -13,8 +14,6 @@ def index():
     usuarios = Usuario.query.all()
     profesions =Profesion.query.all()
     return usuario_view.list(usuarios,profesions)
-
-@usuario_bp.route('/detalle')
 
 @usuario_bp.route('/create',methods=['GET','POST'])
 def create():

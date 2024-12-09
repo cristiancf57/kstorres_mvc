@@ -2,6 +2,7 @@ from flask import request,redirect,url_for,Blueprint
 from datetime import datetime
 from models.proyectos_model import Proyecto
 from models.usuario_model import Usuario
+from models.factura_model import Factura
 from views import proyecto_view
 
 proyecto_bp=Blueprint('proyecto',__name__,url_prefix='/proyectos')
@@ -9,9 +10,23 @@ proyecto_bp=Blueprint('proyecto',__name__,url_prefix='/proyectos')
 @proyecto_bp.route('/')
 def index():
     # recupera todo los registros de proyectos
+    cont_p=Proyecto.query.count()
+    cont_pryent=Proyecto.query.filter_by(estado = 'Entregado').count()
+    porp= (cont_pryent * 100)/cont_p
+    porp=round(porp,2)
+    cont_usr = Usuario.query.count()
+    cont_usup=Usuario.query.filter_by(id_rol = 3).count()
+    porus=(cont_usup * 100)/cont_usr
+    porus=round(porus,2)
+    tsals = Factura.query.filter_by(deuda='cancelado').count()
+    tot=Factura.query.count()
+    pors = (tsals * 100)/tot
+    porsl=round(pors,2)
+    # estds=(cont_p,porp,cont_usr,porus,total_sal,porsl)
     proyectos= Proyecto.get_all()
     usuarios = Usuario.get_all()
-    return proyecto_view.list(proyectos,usuarios)
+    facturas = Factura.get_all()
+    return proyecto_view.list(proyectos,usuarios,facturas,cont_p,porp,cont_usr,porus,tot,porsl)
 
 @proyecto_bp.route('/detalle')
 def detalles():
@@ -44,7 +59,7 @@ def create():
         proyectos.save()
         return redirect(url_for('proyecto.index'))
 
-    usuarios = Usuario.get_all()
+    usuarios = Usuario.query.filter_by(id_rol=3)
     return proyecto_view.create(usuarios)
 
 @proyecto_bp.route('/edit/<int:id>',methods=['GET','POST'])

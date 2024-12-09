@@ -8,14 +8,14 @@
             <div class=""><h5>_</h5></div>
             <div class="col-lg-7">
                 <h3 class="text-success-emphasis">Iniciar Sesión</h3>
-                <form method="POST" action="/login">
+                <form method="POST" action="{{ url_for('login.index') }}">
                     <label for="username" class="form-label">Usuario:</label>
                     <input type="text" class="form-control" id="username" name="username" required>
                     <label for="password" class="form-label">Contraseña:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                     <br>
                     <input type="submit" value="Iniciar Sesión" class="form-control btn btn-warning w-60 text-center"><br><br>
-                    <label class=""><a href="">Registrarse</a></label>
+                    <label class=""><a href="#">Recuperar</a></label>
                 </form>
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}

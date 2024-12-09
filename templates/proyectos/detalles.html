@@ -52,10 +52,10 @@
                         <td>{{ item.presupuesto}}</td>
                         <td>{{ item.usuario.nombre }} {{item.usuario.apellido }}</td>
                         <td>
-                        <a href="{{ url_for('proyecto.edit',id=item.id) }}" class="btn btn-outline-warning">Editar</a>
+                        <a href="{{ url_for('proyecto.edit',id=item.id) }}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
                         </td>
                         <td>
-                        <a href="{{ url_for('proyecto.delete',id=item.id) }}" class="btn btn-outline-danger">Eliminar</a>
+                        <a href="{{ url_for('proyecto.delete',id=item.id) }}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

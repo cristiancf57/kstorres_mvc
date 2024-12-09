@@ -16,7 +16,7 @@
     <div class="row">
 
       <!-- Left side columns -->
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <div class="row">
 
           <!-- Sales Card -->
@@ -24,15 +24,15 @@
             <div class="card info-card sales-card">
 
               <div class="card-body">
-                <h5 class="card-title">Proyectos <span>| Todos</span></h5>
+                <h5 class="card-title">Proyectos <span>| Entrgas</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="ri-folder-5-line"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>145</h6>
-                    <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    <h6>{{ cont_p }}</h6>
+                    <span class="text-success small pt-1 fw-bold">{{porp}} %</span> <span class="text-muted small pt-2 ps-1">Entregados</span>
 
                   </div>
                 </div>
@@ -46,15 +46,15 @@
             <div class="card info-card revenue-card">
 
               <div class="card-body">
-                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                <h5 class="card-title">Facturas <span>| canceladas</span></h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="bi bi-currency-dollar"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>$3,264</h6>
-                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                    <h6>{{total_sal}}</h6>
+                    <span class="text-success small pt-1 fw-bold">{{porsl}} %</span> <span class="text-muted small pt-2 ps-1">Canceladas</span>
 
                   </div>
                 </div>
@@ -76,8 +76,8 @@
                     <i class="bi bi-people"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>12</h6>
-                    <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                    <h6>{{cont_usr}} </h6>
+                    <span class="text-danger small pt-1 fw-bold">{{porus}} %</span> <span class="text-muted small pt-2 ps-1">Supervisores</span>
 
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                 <table class="table table-borderless datatable">
                   <thead>
                     <tr>
-                        <th scope="col">Id</th>
+                        <th scope="col" >Id</th>
                         <th scope="col">Proyecto</th>
                         <th scope="col">Supervisor</th>
                         <th scope="col">Caracteristica</th>
@@ -108,7 +108,7 @@
                   <tbody>
                     {% for item in proyectos %}
                     <tr>
-                        <th scope="row"><a href="{{ url_for('proyecto.edit',id=item.id) }}">{{ item.id }}</a></th>
+                        <th class="fw-bold"><a href="{{ url_for('proyecto.edit',id=item.id) }}">{{ item.id }}</a></th>
                         <th>{{ item.proyecto }}</th>
                         <th>{{ item.usuario.nombre }} {{item.usuario.apellido }}</th>
                         <th>{{ item.caracteristica }}</th>
@@ -134,54 +134,42 @@
             <div class="card top-selling overflow-auto">
 
               <div class="card-body pb-0">
-                <h5 class="card-title">Personal <span>| Todos</span></h5>
+                <h5 class="card-title">Facturas <span>| lista</span></h5>
 
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th scope="col">Preview</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Sold</th>
-                      <th scope="col">Revenue</th>
-                    </tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Nro de Proyecto</th>
+                      <th scope="col">Nro Factura</th> 
+                      <th scope="col">Concepto</th>
+                      <th scope="col">Importe total</th>
+                      <th scope="col">Cuentas</th>
+                      <th scope="col">Saldo</th>
+                      <th scope="col">Deuda</th>
+                      <th scope="col">Fecha</th>
+                  </tr>
                   </thead>
                   <tbody>
+                    {% for item in facturas %}
                     <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                      <td>$64</td>
-                      <td class="fw-bold">124</td>
-                      <td>$5,828</td>
+                        <th class="fw-bold">{{ item.id }}</th>
+                        <td>{{ item.id_proyecto }}</td>
+                        <td>{{ item.nro_factura }}</td>
+                        <td>{{ item.concepto }}</td>
+                        <td>Bs {{ item.monto }}</td>
+                        <td>Bs {{ item.cuenta }}</td>
+                        <td>Bs {{ item.saldo}}</td>
+                        <td class="badge 
+                            {{ 'bg-danger' if item.deuda == 'nuevo' else '' }} 
+                            {{ 'bg-warning' if item.deuda == 'saldo' else '' }} 
+                            {{ 'bg-success' if item.deuda == 'cancelado' else '' }}">
+                            {{ item.deuda }}
+                        </td>
+                        <td>{{ item.fecha.strftime('%d/%m/%Y')}}</td>
                     </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                      <td>$46</td>
-                      <td class="fw-bold">98</td>
-                      <td>$4,508</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                      <td>$59</td>
-                      <td class="fw-bold">74</td>
-                      <td>$4,366</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                      <td>$32</td>
-                      <td class="fw-bold">63</td>
-                      <td>$2,016</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                      <td>$79</td>
-                      <td class="fw-bold">41</td>
-                      <td>$3,239</td>
-                    </tr>
+                    {% endfor %}
+                    
                   </tbody>
                 </table>
               </div>

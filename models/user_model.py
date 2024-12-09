@@ -38,6 +38,10 @@ class User(db.Model):
     def get_by_username(username):
         return User.query.get(username)
     
+    def check_password(self, password_ac):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.password, password_ac)
+    
     def update(self,username=None,password=None,id_usuario=None):
         if username:
             self.username=username

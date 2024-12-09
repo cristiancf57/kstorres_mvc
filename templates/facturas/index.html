@@ -1,0 +1,75 @@
+{% extends "layout_adm.html" %}
+{% block title %} KSTorres | Facturas {% endblock %}
+
+{% block content %}
+<div class="pagetitle">
+    <h1>Facturas</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Facturas</a></li>
+        <li class="breadcrumb-item">Tables</li>
+        <li class="breadcrumb-item active">Data</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Inventarios de materiales</h5>
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nro de Proyecto</th>
+                        <th>Nro Factura</th> 
+                        <th>Concepto</th>
+                        <th>Importe total</th>
+                        <th>Cuentas</th>
+                        <th>Saldo</th>
+                        <th>Deuda</th>
+                        <th>Fecha</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in facturas %}
+                    <tr>
+                        <th>{{ item.id }}</th>
+                        <td>{{ item.id_proyecto }}</td>
+                        <td>{{ item.nro_factura }}</td>
+                        <td>{{ item.concepto }}</td>
+                        <td>Bs {{ item.monto }}</td>
+                        <td>Bs {{ item.cuenta }}</td>
+                        <td>Bs {{ item.saldo}}</td>
+                        <td class="badge 
+                            {{ 'bg-danger' if item.deuda == 'nuevo' else '' }} 
+                            {{ 'bg-warning' if item.deuda == 'saldo' else '' }} 
+                            {{ 'bg-success' if item.deuda == 'cancelado' else '' }}">
+                            {{ item.deuda }}
+                        </td>
+                        <td>{{ item.fecha.strftime('%d/%m/%Y')}}</td>
+                        <td>
+                        <a href="{{ url_for('factura.edit',id=item.id) }}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
+                        </td>
+                        <td>
+                        <a href="{{ url_for('factura.delete',id=item.id) }}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+{% endblock %}

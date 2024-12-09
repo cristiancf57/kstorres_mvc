@@ -1,0 +1,47 @@
+{% extends "layout_adm.html" %}
+{% block title %} KSTorres | Modificar Factura {% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Modificar Factura</h5>
+
+                <!-- Multi Columns Form -->
+                <form class="row g-3" method="POST" action="{{ url_for('factura.edit',id=factura.id) }}">
+                    <div class="col-md-6">
+                        <label for="" class="form-label">Pryecto</label>
+                        <select name="id_proyecto" id="" class="form-control" required>
+                            <option value="">Seleccionar Proyecto</option>
+                            {% for item in projects %}
+                            <option value="{{ item.id }}" {% if item.id == factura.id_proyecto %} selected {% endif %}>{{ item.proyecto }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">Numero de factura</label>
+                    <input type="number" class="form-control" value="{{ factura.nro_factura }}" name="nro_factura" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="" class="form-label" >Concepto</label>
+                    <input type="text" class="form-control" value="{{ factura.concepto }}" name="concepto"required>
+                </div>
+                <div class="col-md-6">
+                    <label for="" class="form-label">a cuenta</label>
+                    <input type="number" class="form-control" value="{{ factura.saldo }}" name="saldo" min="0" step="0.01">
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-warning">Registrar</button>
+                </div>
+                </form><!-- End Multi Columns Form -->
+
+            </div>
+            </div>
+        </div>
+    </div>
+  </section>
+{% endblock %}
