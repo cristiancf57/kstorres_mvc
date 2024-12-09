@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from models.usuario_model import Usuario
 from models.proyectos_model import Proyecto
 from models.user_model import User
-from views import login_view,proyecto_view
+from views import login_view,welcome_view,proyecto_view
 
 login_bp=Blueprint('login',__name__,url_prefix='/login')
 
@@ -13,11 +13,16 @@ def index():
         username=request.form['username']
         password=request.form['password']
         
-        user = User.query.filter_by(username=username).first()
-        passw = User.query.filter_by(password=password).first()
-        
-        if user:
-            session['user_id'] = user.id
+        users = User.query.filter_by(username=username).first()
+        if users and check_password_hash(users.password,password):
+            idus=users.id_usuario
+            # use_log=Usuario.query.filter_by(id=idus)
+            use_log=Usuario.get_by_id(idus)
+            nombre=use_log.nombre
+            apellido=use_log.apellido
+            profesion = use_log.profesions.profesion
+            foto=use_log.foto
+            session['user_log'] = ({'id':idus,'nombre':nombre,'apellido':apellido,'profesion':profesion,'foto':foto})
             return redirect('/proyectos/')
         else:
             flash("Usuario o contraseña incorrectos.")
@@ -38,3 +43,8 @@ def create():
     usuuarios=Usuario.get_all()
     return login_view.create(usuuarios)
 
+@login_bp.route('/vaciar',methods=['GET'])
+def vaciar():
+    # elimina de session user_log
+    session.pop("user_log",None)
+    return welcome_view.inicio()

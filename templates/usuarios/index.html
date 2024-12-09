@@ -40,7 +40,7 @@
                     {% for item in usuarios %}
                     <tr>
                         <th>{{ item.id }}</th>
-                        <th scope="row"><a href="#"><img src="../../static/img/team/{{ item.foto }}" alt="" width="30" class="rounded-circle"></a></th>
+                        <th scope="row"><a href="{{ url_for('usuario.user_profile',id=item.id) }}"><img src="../../static/img/team/{{ item.foto }}" alt="" width="30" class="rounded-circle"></a></th>
                         <td>{{ item.nombre }}</td>
                         <td>{{ item.apellido }}</td>
                         <td>{{ item.profesions.profesion }}</td>

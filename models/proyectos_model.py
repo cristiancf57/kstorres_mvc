@@ -13,9 +13,6 @@ class Proyecto(db.Model):
     estado = db.Column(db.String(20),nullable=True)
     presupuesto = db.Column(db.Numeric(10,2),nullable=True)
     id_usuario = db.Column(db.Integer,db.ForeignKey('usuarios.id'),nullable=False)
-    # gastos = db.relationship('Gastos',backref='gasto',lazy=True)
-    # intentario = db.relationship('Inventarios',backref='almacen',lazy=True)
-    # foto = db.relationship('Fotos',backref='foto',lazy=True)
     # especificar la relacion
     usuario = db.relationship('Usuario',backref='proyecto')
 

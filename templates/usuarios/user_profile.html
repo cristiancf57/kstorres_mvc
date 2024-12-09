@@ -1,0 +1,187 @@
+{% extends "layout_adm.html" %}
+{% block title %} KSTorres | Usuarios {% endblock %}
+
+{% block content %}
+    <div class="pagetitle">
+      <h1>Profile</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item">Users</li>
+          <li class="breadcrumb-item active">Profile</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+              <img src="../../static/img/team/{{ usuario.foto}}" alt="Profile" class="rounded-circle">
+              <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+              <h3>{{ usuario.profesions.profesion }}</h3>
+              <div class="social-links mt-2">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Detalles</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Editar Perfil</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <h5 class="card-title">Detalles de Perfil</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Nombre</div>
+                    <div class="col-lg-9 col-md-8">{{ usuario.nombre }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Apellido</div>
+                    <div class="col-lg-9 col-md-8">{{ usuario.apellido }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Profesion</div>
+                    <div class="col-lg-9 col-md-8">{{ usuario.profesions.profesion }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Cargo</div>
+                    <div class="col-lg-9 col-md-8">{{ usuario.rols.cargo }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Telefono</div>
+                    <div class="col-lg-9 col-md-8">{{ usuario.telefono }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Salario</div>
+                    <div class="col-lg-9 col-md-8">{{ usuario.salario }}</div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                  <!-- Profile Edit Form -->
+                  <form action="{{ url_for('usuario.edit',id=usuario.id) }}">
+                    <div class="row mb-3">
+                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                      <div class="col-md-8 col-lg-9">
+                        <img src="../../static/img/team/{{ usuario.foto}}" alt="Profile">
+                        <div class="pt-2">
+                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
+                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombre</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="nombre" type="text" class="form-control" id="nombre" value="{{ usuario.nombre}}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="apellido" class="col-md-4 col-lg-3 col-form-label">apellido</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="apellido" type="text" class="form-control" id="apellido" value="{{ usuario.apellido}}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="profesion" class="col-md-4 col-lg-3 col-form-label">Profesion</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select name="id_profesion"  class="form-control" required id="profesion">
+                            <option value="">Seleccionar una profesion</option>
+                            {% for item in profesiones %}
+                            <option value="{{ item.id }}" {% if item.id == usuario.id_profesion %} selected {% endif %}>{{ item.profesion }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="cargo" class="col-md-4 col-lg-3 col-form-label">Cargo</label>
+                      <div class="col-md-8 col-lg-9">
+                        <select name="id_rol" id="" class="form-control" required id="cargo">
+                            <option value="">Seleccionar un rol</option>
+                            {% for rol in roles %}
+                            <option value="{{ rol.id }}" {% if rol.id== usuario.id_rol %} selected {% endif %}>{{ rol.cargo }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="telefono" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="telefono" type="text" class="form-control" id="telefono" value="{{ usuario.telefono}}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="salario" class="col-md-4 col-lg-3 col-form-label">Sueldo</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="salario" type="number" class="form-control" id="salario" value="{{ usuario.salario}}">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="obs" class="col-md-4 col-lg-3 col-form-label">Observaciones</label>
+                        <div class="col-md-8 col-lg-9">
+                          <textarea name="obs" class="form-control" id="obs" style="height: 100px" aria-valuetext="{{ usuario.obs }}"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row mb-3">
+                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
+                      </div>
+                    </div> -->
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

@@ -64,3 +64,24 @@ def delete(id):
     usuario=Usuario.get_by_id(id)
     usuario.delete()
     return redirect(url_for('usuario.index'))
+
+@usuario_bp.route('/user_profile/<int:id>',methods=['GET','POST'])
+def user_profile(id):
+    usuario= Usuario.get_by_id(id)
+    if request.method=='POST':
+        nombre=request.form['nombre']
+        apellido=request.form['apellido']
+        foto=request.form['foto']
+        telefono=request.form['telefono']
+        salario=request.form['salario']
+        obs=request.form['obs']
+        id_profesion=request.form['id_profesion']
+        id_rol=request.form['id_rol']
+
+        # actualizar
+        usuario.update(nombre=nombre,apellido=apellido,foto=foto,telefono=telefono,salario=salario,obs=obs,id_profesion=id_profesion,id_rol=id_rol)
+        return redirect(url_for('usuario.index'))
+    
+    profesiones = Profesion.get_all()
+    roles = Rol.get_all()
+    return usuario_view.user_profile(usuario,profesiones,roles)
