@@ -16,26 +16,18 @@ def index():
         users = User.query.filter_by(username=username).first()
         if users and check_password_hash(users.password,password):
             idus=users.id_usuario
-            # use_log=Usuario.query.filter_by(id=idus)
-            use_log=Usuario.get_by_id(idus)
-            nombre=use_log.nombre
-            apellido=use_log.apellido
-            profesion = use_log.profesions.profesion
-            foto=use_log.foto
-            session['user_log'] = ({'id':idus,'nombre':nombre,'apellido':apellido,'profesion':profesion,'foto':foto})
+            session['user_log'] = idus
             return redirect('/proyectos/')
         else:
-            flash("Usuario o contraseña incorrectos.")
-            
+            flash("Usuario o contraseña incorrectos.")  
     return login_view.inicio()
 
 @login_bp.route('/create',methods=['GET','POST'])
 def create():
     if request.method == 'POST':
         username=request.form['username']
-        passwords=request.form['password']
+        password=request.form['password']
         id_usuario=request.form['id_usuario']
-        password=generate_password_hash(passwords)
 
         user = User(username,password,id_usuario)
         user.save()
