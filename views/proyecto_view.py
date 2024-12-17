@@ -7,9 +7,9 @@ def create(usuarios):
     # se requiere productos y usuarios
     return render_template('proyectos/create.html',usuarios=usuarios)
 
-def edit(proyectos,usuarios):
+def edit(proyects,usuarios):
     # se requiere proyectos y usuarios
-    return render_template('proyectos/edit.html',proyectos=proyectos,usuarios=usuarios)
+    return render_template('proyectos/edit.html',proyects=proyects,usuarios=usuarios)
 
 def detalles(proyectos):
     # se requiere proyectos

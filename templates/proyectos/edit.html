@@ -12,54 +12,54 @@
                 <h5 class="card-title">Editar proyecto</h5>
 
                 <!-- Multi Columns Form -->
-                <form class="row g-3" method="POST" action="{{ url_for('proyecto.edit',id=proyecto.id) }}">
+                <form class="row g-3" method="POST" action="{{ url_for('proyecto.edit',id=proyects.id) }}">
                 <div class="col-md-12">
                     <label for="" class="form-label">Proyecto</label>
-                    <input type="text" class="form-control" name="proyecto" value="{{ proyectos.proyecto }}" required>
+                    <input type="text" class="form-control" name="proyecto" value="{{ proyects.proyecto }}" required>
                 </div>
                 <div class="col-md-12">
                     <label for="" class="form-label">Caracteristica</label>
-                    <input type="text" class="form-control" name="caracteristica" value="{{ proyectos.caracteristica }}" required>
+                    <input type="text" class="form-control" name="caracteristica" value="{{ proyects.caracteristica }}" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="" class="form-label">Superficie</label>
-                    <input type="number" class="form-control" name="superficie" value="{{ proyectos.superficie }}">
+                    <label for="" class="form-label">Superficie /m <sup>2</sup></label>
+                    <input type="number" class="form-control" name="superficie" value="{{ proyects.superfice }}">
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Ubicacion</label>
-                    <input type="text" class="form-control" name="ubicacion" value="{{ proyectos.ubicacion }}" placeholder="Departamento, Municipio, Distrito" required>
+                    <input type="text" class="form-control" name="ubicacion" value="{{ proyects.ubicacion }}" placeholder="Departamento, Municipio, Distrito" required>
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" value="{{ proyectos.imagen }}" name="imagen">
+                    <input type="file" class="form-control" value="{{ proyects.imagen }}" name="imagen">
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Fecha de contrato</label>
-                    <input type="date" class="form-control" name="fecha_inicio" value="{{ proyectos.fecha_inicio.strftime('%Y-%m-%d') }}" required>
+                    <input type="date" class="form-control" name="fecha_inicio" value="{{ proyects.fecha_inicio.strftime('%Y-%m-%d') }}" required>
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Fecha de entrega</label>
-                    <input type="date" class="form-control" name="fecha_fin" value="{{ proyectos.fecha_fin.strftime('%Y-%m-%d') }}">
+                    <input type="date" class="form-control" name="fecha_fin" value="{{ proyects.fecha_fin.strftime('%Y-%m-%d') }}">
                 </div>
                 <div class="col-md-6">
-                    <label for="" class="form-label">Estado</label>
+                    <label for="" class="form-label">Estado {{ proyects.estado }}</label>
                     <select  class="form-select" name="estado" required>
-                        <opid="inputState"tion selected="">Seleccionar</option>
-                        {% for cliente in clientes %}
-                        <option value="{{proyectos.estado}}">{{ proyectos.estado }}</option>
-                        {% endfor %}
+                        <option selected="">Seleccionar</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="En Construsccion">En Construccion</option>
+                        <option value="Entregado">Entregado</option>
                     </select>
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Presupuesto</label>
-                    <input type="number" class="form-control" value="{{ proyectos.presupuesto }}" name="presupuesto" min="0" step="0.01">
+                    <input type="number" class="form-control" value="{{ proyects.presupuesto }}" name="presupuesto" min="0" step="0.01">
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Usuario</label>
-                    <select name="cliente_id" id="" class="form-control" required>
+                    <select name="id_usuario" id="" class="form-control" required>
                         <option value="">Seleccionar un supervisor</option>
                         {% for usuario in usuarios %}
-                        <option value="{{usuario.id}}" {% if usuario.id== proyecto.usuario_id %} selected {% endif %}>{{ usuario.nombre }} {{usuario.apellido}}</option>
+                        <option value="{{usuario.id}}" {% if usuario.id== proyects.usuario_id %} selected {% endif %}>{{ usuario.nombre }} {{usuario.apellido}}</option>
                         {% endfor %}
                     </select>
                 </div>

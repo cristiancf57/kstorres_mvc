@@ -64,7 +64,7 @@ def create():
 
 @proyecto_bp.route('/edit/<int:id>',methods=['GET','POST'])
 def edit(id):
-    proyectos= Proyecto.get_by_id(id)
+    proyects= Proyecto.get_by_id(id)
     if request.method=='POST':
         proyecto=request.form['proyecto']
         caracteristica=request.form['caracteristica']
@@ -75,17 +75,17 @@ def edit(id):
         fechafn_str=request.form['fecha_fin']
         estado=request.form['estado']
         presupuesto=request.form['presupuesto']
-        id_isuario=request.form['id_isuario']
+        id_usuario=request.form['id_usuario']
 
         fecha_inicio = datetime.strptime(fechafn_str,'%Y-%m-%d').date()
         fecha_fin = datetime.strptime(fechain_str,'%Y-%m-%d').date()
 
         # actualizar
-        proyectos.update(proyecto=proyecto,caracteristica=caracteristica,superficie=superficie,ubicacion=ubicacion,imagen=imagen,fecha_inicio=fecha_inicio,fecha_fin=fecha_fin,estado=estado,presupuesto=presupuesto,id_isuario=id_isuario)
+        proyects.update(proyecto=proyecto,caracteristica=caracteristica,superfice=superficie,ubicacion=ubicacion,imagen=imagen,fecha_inicio=fecha_inicio,fecha_fin=fecha_fin,estado=estado,presupuesto=presupuesto,id_usuario=id_usuario)
         return redirect(url_for('proyecto.index'))
     
-    usuarios=Usuario.query.all()
-    return proyecto_view.edit(proyectos,usuarios)
+    usuarios=Usuario.query.filter_by(id_rol=3)
+    return proyecto_view.edit(proyects,usuarios)
 
 @proyecto_bp.route('/delete/<int:id>')
 def delete(id):
